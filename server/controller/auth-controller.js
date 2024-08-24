@@ -3,18 +3,16 @@ import userModel from "../model/user-model.js";
 export const register = async (req, res) => {
   try {
     const { name, email, password, address, phone } = req.body;
+
     if (
-      !name?.trim() ||
-      !email?.trim() ||
-      !password?.trim() ||
-      !address?.trim() ||
-      !phone?.trim()
+      [name, email, password, address, phone].some((field) => !field?.trim())
     ) {
       return res.status(400).json({
         message: "All fields are required and must not be empty.",
         success: false,
       });
     }
+
     //existing user
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
@@ -77,6 +75,7 @@ export const login = async (req, res) => {
       message: "Login successful",
       success: true,
       token, // Include the generated token in the response
+      user,
     });
   } catch (error) {
     return res.status(500).json({

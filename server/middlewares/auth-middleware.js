@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-
+import userModel from "../model/user-model.js";
 // Middleware function to protect routes
 export const ProtectedRoute = async (req, res, next) => {
   try {
@@ -30,6 +30,26 @@ export const ProtectedRoute = async (req, res, next) => {
     console.error(error);
     res.status(403).json({
       message: "Invalid or expired token.",
+      success: false,
+    });
+  }
+};
+
+//admin middleware
+export const isAdmin = async (req, res, next) => {
+  try {
+    const user = await userModel.findById(req.user_id);
+    if (user.role !== 1) {
+      return res.status(401).json({
+        message: "Unauthrized Access",
+        success: false,
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
       success: false,
     });
   }
