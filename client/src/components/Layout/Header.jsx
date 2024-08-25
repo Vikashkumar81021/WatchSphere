@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
 const Header = () => {
   return (
     <>
@@ -16,13 +17,18 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <NavLink to="/" className="navbar-brand" href="#">
-              Hidden brand
-            </NavLink>
+            <Link to="/" className="navbar-brand">
+              WatchSphere
+            </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link active" aria-current="page">
+                <NavLink to="/" className="nav-link ">
                   Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/category" className="nav-link">
+                  Category
                 </NavLink>
               </li>
               <li className="nav-item">
