@@ -4,7 +4,7 @@ import Homepage from "./pages/Homepage";
 import Aboutus from "./pages/Aboutus";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
-
+import Register from "./pages/Auth/Register";
 const App = () => {
   return (
     <>
@@ -13,6 +13,7 @@ const App = () => {
         <Route path="/about" element={<Aboutus />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
