@@ -5,6 +5,7 @@ import Aboutus from "./pages/Aboutus";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import Register from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
 const App = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
