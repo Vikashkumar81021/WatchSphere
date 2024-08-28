@@ -6,6 +6,8 @@ import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
+import Dashboard from "./pages/user/Dashboard";
+import PrivateRoutes from "./components/routes/PrivateRoutes";
 const App = () => {
   return (
     <>
@@ -16,6 +18,10 @@ const App = () => {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/dashboard" element={<PrivateRoutes />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
       </Routes>
     </>
   );
