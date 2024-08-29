@@ -3,18 +3,16 @@ import { useState, useEffect, createContext, useContext } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({
-    user: null,
-    token: "",
+  // Initialize state with token and user from localStorage if available
+  const [auth, setAuth] = useState(() => {
+    const storedAuth = localStorage.getItem("auth");
+    return storedAuth ? JSON.parse(storedAuth) : { user: null, token: "" };
   });
+
   useEffect(() => {
-    // Example useEffect with setState
-    // This should only run once or when specific dependencies change
-    setAuth((prevAuth) => ({
-      ...prevAuth,
-      token: "someToken", // Example of setting token (remove this logic to avoid infinite loop)
-    }));
-  }, []);
+    // Whenever the auth state changes, update localStorage
+    localStorage.setItem("auth", JSON.stringify(auth));
+  }, [auth]);
 
   return (
     <AuthContext.Provider value={[auth, setAuth]}>
@@ -23,7 +21,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook
 const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };

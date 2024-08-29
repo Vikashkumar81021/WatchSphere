@@ -1,6 +1,7 @@
+import Spinner from "../../pages/Spinner";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../contextAPI/Auth"; // Ensure correct path
-import Spinner from "../Spinner"; // Ensure correct path
+import { useAuth } from "../../contextAPI/Auth"; // Adjust path if necessary
+
 import axios from "axios";
 import { Outlet } from "react-router-dom";
 

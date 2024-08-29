@@ -2,10 +2,12 @@ import userModel from "../model/user-model.js";
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, address, phone } = req.body;
+    const { name, email, password, address, answer, phone } = req.body;
 
     if (
-      [name, email, password, address, phone].some((field) => !field?.trim())
+      [name, email, password, address, phone, answer].some(
+        (field) => !field?.trim()
+      )
     ) {
       return res.status(400).json({
         message: "All fields are required and must not be empty.",
@@ -27,6 +29,7 @@ export const register = async (req, res) => {
       address,
       password,
       phone,
+      answer,
     }).save();
     return res.status(201).json({
       message: "User Register successfully",
@@ -82,6 +85,44 @@ export const login = async (req, res) => {
       message: "An error occurred while logging in.",
       success: false,
       error: error.message,
+    });
+  }
+};
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email, newPassword, answer } = req.body;
+
+    // Validate input fields
+    if (!email || !newPassword || !answer) {
+      return res.status(400).json({
+        message: "Email, newPassword, and answer are required.",
+        success: false,
+      });
+    }
+
+    // Find the user based on email and security answer
+    const user = await userModel.findOne({ email, answer });
+    if (!user) {
+      return res.status(404).json({
+        message: "Wrong email or answer",
+        success: false,
+      });
+    }
+
+    // Update the password and save user, relying on pre('save') middleware to hash the password
+    user.password = newPassword;
+    await user.save();
+
+    // Successful password update response
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully.",
+    });
+  } catch (error) {
+    console.error("Error in forgotPassword:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
     });
   }
 };

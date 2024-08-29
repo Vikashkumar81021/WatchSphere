@@ -7,7 +7,8 @@ import PageNotFound from "./pages/PageNotFound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
-import PrivateRoutes from "./components/routes/PrivateRoutes";
+import PrivateRoutes from "./components/routes/PrivateRoutes.jsx";
+import FrogotPassword from "./pages/Auth/Frogot-password.jsx";
 const App = () => {
   return (
     <>
@@ -18,7 +19,7 @@ const App = () => {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/forgot-password" element={<FrogotPassword />} />
         <Route path="/dashboard" element={<PrivateRoutes />}>
           <Route path="" element={<Dashboard />} />
         </Route>
