@@ -11,8 +11,12 @@ router.post("/register", register);
 router.post("/login", login);
 //forgot-password
 router.post("/forgot-password", forgotPassword);
-//protected route
+//protected User route
 router.get("/user-auth", ProtectedRoute, (req, res) => {
+  res.status(200).send({ ok: true });
+});
+//Protected admin route
+router.get("/admin-auth", ProtectedRoute, isAdmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
 export default router;

@@ -7,8 +7,11 @@ import PageNotFound from "./pages/PageNotFound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
-import PrivateRoutes from "./components/routes/PrivateRoutes.jsx";
-import FrogotPassword from "./pages/Auth/Frogot-password.jsx";
+import PrivateRoutes from "./components/routes/PrivateRoutes";
+import ForgotPassword from "./pages/Auth/Frogot-password"; // Correct the typo here
+import AdminRoute from "./components/routes/Adminroute";
+import AdminDashboard from "./pages/admin/Admindashboard"; // Ensure this matches your component and file
+
 const App = () => {
   return (
     <>
@@ -19,9 +22,16 @@ const App = () => {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<FrogotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Private Routes for user dashboard */}
         <Route path="/dashboard" element={<PrivateRoutes />}>
           <Route path="" element={<Dashboard />} />
+        </Route>
+
+        {/* Admin Routes */}
+        <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </>

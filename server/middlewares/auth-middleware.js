@@ -38,7 +38,7 @@ export const ProtectedRoute = async (req, res, next) => {
 //admin middleware
 export const isAdmin = async (req, res, next) => {
   try {
-    const user = await userModel.findById(req.user_id);
+    const user = await userModel.findById(req.user._id);
     if (user.role !== 1) {
       return res.status(401).json({
         message: "Unauthrized Access",
