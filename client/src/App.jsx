@@ -11,6 +11,11 @@ import PrivateRoutes from "./components/routes/PrivateRoutes";
 import ForgotPassword from "./pages/Auth/Frogot-password"; // Correct the typo here
 import AdminRoute from "./components/routes/Adminroute";
 import AdminDashboard from "./pages/admin/Admindashboard"; // Ensure this matches your component and file
+import CreateCategory from "./pages/admin/CreateCategory";
+import CreateProduct from "./pages/admin/CreateProduct";
+import Users from "./pages/admin/Users";
+import Orders from "./pages/user/Orders";
+import Profile from "./pages/user/Profile";
 
 const App = () => {
   return (
@@ -26,12 +31,17 @@ const App = () => {
 
         {/* Private Routes for user dashboard */}
         <Route path="/dashboard" element={<PrivateRoutes />}>
-          <Route path="" element={<Dashboard />} />
+          <Route path="user" element={<Dashboard />} />
+          <Route path="user/orders" element={<Orders />} />
+          <Route path="user/profile" element={<Profile />} />
         </Route>
 
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/create-category" element={<CreateCategory />} />
+          <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/users" element={<Users />} />
         </Route>
       </Routes>
     </>

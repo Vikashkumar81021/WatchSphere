@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import morgan from "morgan";
 import authroutes from "./routes/auth-routes.js";
+import categoryRoute from "./routes/category-routes.js";
 import cors from "cors";
 dotenv.config();
 const app = express();
@@ -16,8 +17,9 @@ app.use(
 );
 app.use(express.json());
 app.use(morgan("dev"));
-
+//routes
 app.use("/api/v1/auth", authroutes);
+app.use("/api/v1", categoryRoute);
 connectDB();
 app.listen(PORT, () => {
   console.log(`Server is listen at ${PORT}`);
